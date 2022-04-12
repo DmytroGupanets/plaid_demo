@@ -3,7 +3,7 @@ import { useState } from "react";
 import Button from "../components/Button/Button";
 import Link from 'next/link';
 import { useRouter } from "next/router";
-import { getAccount, getPaymentInfo, makePayment } from "../api/api";
+import { getAccounts, getPaymentInfo, makePayment } from "../api/api";
 import AccountCard from "../components/AccountCard/AccountCard";
 
 
@@ -17,7 +17,7 @@ const ConfirmPaymentPage = () => {
 
 	const getUserAccount = async () => {
 		setLoading(true);
-		const account = await getAccount();
+		const account = await getAccounts();
 		console.log('account :>> ', account.data);
 		setAccount(account.data);
 		setLoading(false);
@@ -50,7 +50,7 @@ const ConfirmPaymentPage = () => {
 		<div className="container">
 			<h1>Confirm your payment</h1>
 			{payment && <h3>Amount: <span>${payment.amount / 100}</span></h3>}
-			{account ? <AccountCard account={account} onLoanClick={() => { }} /> : <p style={{ fontWeight: 'bold', opacity: 0.7 }}>Loading checking account data...</p>}
+			{account ? <AccountCard preffered={true} account={account} onClick={() => { }} /> : <p style={{ fontWeight: 'bold', opacity: 0.7 }}>Loading checking account data...</p>}
 			<p>We`ll charge you bank account when you press this fucking button</p>
 			<Button isPreloader={isLoading} onClick={onHandlePaymentClick}>Make a payment</Button>
 			<br />

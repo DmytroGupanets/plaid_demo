@@ -8,6 +8,18 @@
     cursor: pointer;
     transform: scaleX(1);
 
+    &__preffered {
+        background-color: rgba(11, 37, 182, 0.781);
+    }
+
+    &__logo {
+        text-align: end;
+        color: white;
+        font-size: large;
+        font-weight: 700;
+        margin: 0;
+    }
+
     &__servicer {
         color: white;
         font-size: large;
@@ -29,5 +41,12 @@
     &__principal {
         color: white;
         margin: 0;
+    }
+
+    &__id {
+        color: white;
+        font-size: 10px;
+        margin: 0;
+        text-align: end;
     }
 }

@@ -32,7 +32,7 @@ const ConnectCheckingAccountPage = () => {
 		setLoading(true);
 		// https://stackoverflow.com/a/58613959
 		await createAccount(publicToken)
-		router.push('/main');
+		router.push('/accounts');
 	}, []);
 
 	const config: PlaidLinkOptions = {
