@@ -1,8 +1,8 @@
 import axios from "axios";
 
 // axios.defaults.baseURL = '/api/'
-// axios.defaults.baseURL = 'http://localhost:5502/'
-axios.defaults.baseURL = 'https://api.dev.levermydebt.com/'
+axios.defaults.baseURL = 'http://localhost:5502/'
+// axios.defaults.baseURL = 'https://api.dev.levermydebt.com/'
 
 
 interface ILoginConfirm {
@@ -21,18 +21,19 @@ export const loginConfirm = async ({ phone, password }: ILoginConfirm) => {
     const { data } = await axios.post('auth/login/confirm', {
         phone, password
     })
-    axios.defaults.headers.common['Authorization'] = `Bearer ${data.token}`;
+    localStorage.setItem('user_token', data.token)
+    axios.defaults.headers.common['Authorization'] = `Bearer ${data.token}`
     return data
 }
 
 export const getAllLoans = async () => {
+    await axios.post('loan/sync')
     const { data } = await axios.get(`loan`)
     return data.loans
 }
 
 export const getLoanById = async (loanId: string) => {
     const { data } = await axios.get(`loan/${loanId}`)
-
     return data
 }
 
@@ -43,6 +44,11 @@ export const getLink = async () => {
 
 export const createPaymentIntent = async (amount: number, payitoffLoanId: string) => {
     const { data } = await axios.post('payment/intent', { amount, payitoffLoanId })
+    return data.payment
+}
+
+export const makePayment = async (paymentId: string) => {
+    const { data } = await axios.post(`payment/${paymentId}/confirm`)
     return data.payment
 }
 

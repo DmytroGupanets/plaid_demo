@@ -4,7 +4,6 @@ import { useForm } from "react-hook-form"
 import { createPaymentIntent, getLoanById } from "../api/api"
 import Button from '../components/Button/Button'
 import LoanCard from "../components/LoanCard/LoanCard"
-import Image from "next/image"
 
 
 export default function Home() {
@@ -18,7 +17,9 @@ export default function Home() {
 
   const getLoan = async () => {
     setLoading(true);
-    const loanData = await getLoanById(localStorage.getItem('loan_id'))
+    const loanId = localStorage.getItem('loan_id')
+    let loanData = null
+    if (loanId) loanData = await getLoanById(loanId)
     setLoan(loanData)
     setLoading(false)
   }
@@ -38,9 +39,9 @@ export default function Home() {
     localStorage.setItem('paymentId', payment._id)
     if (payment.status === 'requires_confirmation') router.push('/confirm_payment')
     else if (payment.status === 'requires_payment_method') router.push('/connect_checking')
-
   }
 
+  console.log('loan :>> ', loan);
   return (
     <div className={'container'}>
       <h1>Initiate payment</h1>

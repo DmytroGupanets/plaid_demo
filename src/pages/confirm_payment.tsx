@@ -3,7 +3,8 @@ import { useState } from "react";
 import Button from "../components/Button/Button";
 import Link from 'next/link';
 import { useRouter } from "next/router";
-import { getAccount, getPaymentInfo } from "../api/api";
+import { getAccount, getPaymentInfo, makePayment } from "../api/api";
+import AccountCard from "../components/AccountCard/AccountCard";
 
 
 
@@ -17,7 +18,8 @@ const ConfirmPaymentPage = () => {
 	const getUserAccount = async () => {
 		setLoading(true);
 		const account = await getAccount();
-		setAccount(account);
+		console.log('account :>> ', account.data);
+		setAccount(account.data);
 		setLoading(false);
 	}
 
@@ -36,24 +38,21 @@ const ConfirmPaymentPage = () => {
 		getUserAccount()
 	}, []);
 
+	const onHandlePaymentClick = async () => {
+		setLoading(true)
+		const paymentId = localStorage.getItem('paymentId')
+		const confirmedPayment = await makePayment(paymentId)
+		console.log('payment :>> ', confirmedPayment);
+		setLoading(false)
+	}
+
 	return (
 		<div className="container">
 			<h1>Confirm your payment</h1>
 			{payment && <h3>Amount: <span>${payment.amount / 100}</span></h3>}
-			<div className="accountCard" style={{ backgroundColor: '#212121' }}>
-				<div className="accountCard__name">{account?.name}</div>
-				<div className="accountCard__summary">
-					<div>${account?.balances?.available}</div>
-					<div>*** {account?.mask}</div>
-				</div>
-				<Link href={'/connect_checking'}>
-					<a>
-						Change account
-					</a>
-				</Link>
-			</div>
+			{account ? <AccountCard account={account} onLoanClick={() => { }} /> : <p style={{ fontWeight: 'bold', opacity: 0.7 }}>Loading checking account data...</p>}
 			<p>We`ll charge you bank account when you press this fucking button</p>
-			<Button isPreloader={isLoading} onClick={() => alert(1)}>Make a payment</Button>
+			<Button isPreloader={isLoading} onClick={onHandlePaymentClick}>Make a payment</Button>
 			<br />
 			<Link href={'/'}>
 				<a>

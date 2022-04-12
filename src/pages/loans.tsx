@@ -5,7 +5,6 @@ import { useForm } from "react-hook-form";
 import { getAllLoans } from "../api/api";
 import Button from '../components/Button/Button';
 import LoanCard from "../components/LoanCard/LoanCard";
-import preloader from '../assets/images/icons/loading.svg';
 
 
 export default function Home() {

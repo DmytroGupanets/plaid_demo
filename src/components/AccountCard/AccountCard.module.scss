@@ -1,0 +1,33 @@
+.card {
+    width: 400px;
+    padding: 10px;
+    background-color: rgb(4, 7, 8);
+    border-radius: 12px;
+    margin-bottom: 15px;
+    box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.05);
+    cursor: pointer;
+    transform: scaleX(1);
+
+    &__servicer {
+        color: white;
+        font-size: large;
+        font-weight: 700;
+        margin: 0;
+    }
+
+    &__description {
+        color: white;
+        margin: 0;
+        margin-bottom: 10px;
+    }
+
+    &__interest {
+        color: white;
+        margin: 0;
+    }
+
+    &__principal {
+        color: white;
+        margin: 0;
+    }
+}
