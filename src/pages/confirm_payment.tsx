@@ -3,8 +3,9 @@ import { useState } from "react";
 import Button from "../components/Button/Button";
 import Link from 'next/link';
 import { useRouter } from "next/router";
-import { getAccounts, getPaymentInfo, makePayment } from "../api/api";
+import { getAccountById, getAccounts, getPaymentInfo, getUserInfo, makePayment } from "../api/api";
 import AccountCard from "../components/AccountCard/AccountCard";
+import { userInfo } from "os";
 
 
 
@@ -15,27 +16,27 @@ const ConfirmPaymentPage = () => {
 
 	const router = useRouter()
 
-	const getUserAccount = async () => {
-		setLoading(true);
-		const account = await getAccounts();
-		console.log('account :>> ', account.data);
-		setAccount(account.data);
-		setLoading(false);
-	}
-
 	const getPayment = async () => {
 		setLoading(true);
 		const paymentId = localStorage.getItem('paymentId')
 
 		if (!paymentId) router.push('initiate_payment')
-		const payment = await getPaymentInfo(paymentId);
-		setPayment(payment);
-		setLoading(false);
+		const payment = await getPaymentInfo(paymentId)
+		setPayment(payment)
+
+		let account
+		if (payment.account) {
+			account = await getAccountById(payment.account)
+		} else {
+			const user = await getUserInfo()
+			account = await getAccountById(user.prefferedCheckingAccount)
+		}
+		setAccount(account)
+		setLoading(false)
 	}
 
 	useEffect(() => {
 		getPayment()
-		getUserAccount()
 	}, []);
 
 	const onHandlePaymentClick = async () => {
@@ -45,6 +46,8 @@ const ConfirmPaymentPage = () => {
 		console.log('payment :>> ', confirmedPayment);
 		setLoading(false)
 	}
+
+
 
 	return (
 		<div className="container">

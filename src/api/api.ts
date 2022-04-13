@@ -1,8 +1,8 @@
 import axios from "axios";
 
 // axios.defaults.baseURL = '/api/'
-axios.defaults.baseURL = 'http://localhost:5502/'
-// axios.defaults.baseURL = 'https://api.dev.levermydebt.com/'
+// axios.defaults.baseURL = 'http://localhost:5502/'
+axios.defaults.baseURL = 'https://api.dev.levermydebt.com/'
 
 
 interface ILoginConfirm {
@@ -58,6 +58,12 @@ export const getAccounts = async () => {
     return data.accounts
 }
 
+export const getAccountById = async (accountId: string) => {
+    const { data } = await axios.get(`account/checking_account`)
+    const account = data.accounts.find(acc => acc.id === accountId)
+    return account
+}
+
 export const createAccount = async (publicToken: string) => {
     const { data } = await axios.post("account/checking_account/confirm", {
         publicToken,
@@ -68,4 +74,14 @@ export const createAccount = async (publicToken: string) => {
 export const getPaymentInfo = async (paymentId: string) => {
     const { data } = await axios.get(`payment/${paymentId}`)
     return data.payment
+}
+
+export const getUserInfo = async () => {
+    const { data } = await axios.get('user')
+    return data.user
+}
+
+export const setPrefferedAccount = async (accountId: string) => {
+    const { data } = await axios.post('account/checking_account/preffered', { accountId })
+    return data.prefferedCheckingAccount
 }

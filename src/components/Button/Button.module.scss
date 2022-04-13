@@ -18,6 +18,8 @@
   border-radius: 12px;
   width: auto;
 
+  cursor: pointer;
+
   img {
     height: 15px;
     margin-right: 15px;
@@ -27,7 +29,6 @@
     color: white;
     background: linear-gradient(132.32deg, #5f7df1 4.26%, #3055ec 100%);
     border: none;
-
   }
 
   &__notFill {
@@ -51,8 +52,8 @@
       color: white;
       background: #c469ef;
     }
-    &_white{
-      background:white;
+    &_white {
+      background: white;
       border: 1px solid $grey;
     }
   }
@@ -79,8 +80,8 @@
     }
   }
 
-  &__bg_green{
-    background: #35D36B;
+  &__bg_green {
+    background: #35d36b;
     color: white;
   }
 
