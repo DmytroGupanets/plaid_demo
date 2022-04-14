@@ -8,6 +8,24 @@
     cursor: pointer;
     transform: scaleX(1);
 
+    &__contentContainer {
+        display: flex;
+    }
+
+    &__accountLogo {
+        width: 70px;
+        height: 70px;
+    }
+
+    &__topContainer {
+        display: flex;
+        justify-content: space-between;
+    }
+
+    &__content {
+        margin-left: 10px;
+    }
+
     &__preffered {
         background-color: rgba(11, 37, 182, 0.781);
     }

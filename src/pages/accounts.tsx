@@ -1,6 +1,6 @@
 import { useRouter } from 'next/router'
 import React, { useEffect, useState } from 'react'
-import { getAccounts, setPrefferedAccount } from '../api/api'
+import { deleteAccount, getAccounts, setPrefferedAccount } from '../api/api'
 import AccountCard from '../components/AccountCard/AccountCard'
 import Button from '../components/Button/Button'
 
@@ -40,6 +40,13 @@ const AccountsPage = () => {
         localStorage.setItem('preffered_account', prefferedRes)
     }
 
+    const onDeleteClick = async (accountId) => {
+        setLoading(true)
+        await deleteAccount(accountId)
+        getUserAccounts()
+        setLoading(false)
+    }
+
 
 
     return <div className="container">
@@ -47,10 +54,10 @@ const AccountsPage = () => {
         <p>You can choose your preffered account for payments</p>
         {loading && <p>Loading User`s accounts...</p>}
         {!!accounts.length && accounts.map(acc =>
-            preffered === acc.id && <AccountCard key={acc.id} account={acc} onClick={onAccountClick} preffered={preffered === acc.id} />
+            preffered === acc.id && <AccountCard key={acc.id} account={acc} onClick={onAccountClick} preffered={preffered === acc.id} onDelete={onDeleteClick} />
         )}
         {!!accounts.length && accounts.map(acc =>
-            preffered !== acc.id && <AccountCard key={acc.id} account={acc} onClick={onAccountClick} preffered={preffered === acc.id} />)}
+            preffered !== acc.id && <AccountCard key={acc.id} account={acc} onClick={onAccountClick} preffered={preffered === acc.id} onDelete={onDeleteClick} />)}
         <div style={{ display: 'flex', justifyContent: 'space-between' }}>
             <Button theme="fill" onClick={() => router.push('/connect_checking')}>Connect checking account</Button>
             <Button theme="fill" onClick={() => router.push('/main')}>Back</Button>

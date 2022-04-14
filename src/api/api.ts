@@ -71,6 +71,11 @@ export const createAccount = async (publicToken: string) => {
     return data
 }
 
+export const deleteAccount = async (accountId: string) => {
+    const { data } = await axios.delete(`account/${accountId}`)
+    return data
+}
+
 export const getPaymentInfo = async (paymentId: string) => {
     const { data } = await axios.get(`payment/${paymentId}`)
     return data.payment
