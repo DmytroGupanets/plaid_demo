@@ -53,7 +53,7 @@ const ConfirmPaymentPage = () => {
 		<div className="container">
 			<h1>Confirm your payment</h1>
 			{payment && <h3>Amount: <span>${payment.amount / 100}</span></h3>}
-			{account ? <AccountCard preffered={true} account={account} onClick={() => { }} /> : <p style={{ fontWeight: 'bold', opacity: 0.7 }}>Loading checking account data...</p>}
+			{account ? <AccountCard preffered={true} account={account} onClick={() => { }} onDelete={() => { }} /> : <p style={{ fontWeight: 'bold', opacity: 0.7 }}>Loading checking account data...</p>}
 			<p>We`ll charge you bank account when you press this fucking button</p>
 			<Button isPreloader={isLoading} onClick={onHandlePaymentClick}>Make a payment</Button>
 			<br />

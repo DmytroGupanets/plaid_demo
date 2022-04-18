@@ -1,8 +1,8 @@
 import axios from "axios";
 
 // axios.defaults.baseURL = '/api/'
-// axios.defaults.baseURL = 'http://localhost:5502/'
-axios.defaults.baseURL = 'https://api.dev.levermydebt.com/'
+axios.defaults.baseURL = 'http://localhost:5502/'
+// axios.defaults.baseURL = 'https://api.dev.levermydebt.com/'
 
 
 interface ILoginConfirm {
@@ -10,6 +10,7 @@ interface ILoginConfirm {
     password: string
 }
 
+// ====================  AUTH
 export const loginIntention = async (phone: string) => {
     const { data } = await axios.post(`auth/login/intention`, {
         phone
@@ -27,6 +28,18 @@ export const loginConfirm = async ({ phone, password }: ILoginConfirm) => {
     return data
 }
 
+// ====================  USER
+export const getUserInfo = async () => {
+    const { data } = await axios.get('user')
+    return data.user
+}
+
+// ====================  LOANS
+export const getLink = async () => {
+    const { data } = await axios.get(`account/checking_account/link`);
+    return data.data
+}
+
 export const getAllLoans = async () => {
     await axios.post('loan/sync')
     const { data } = await axios.get(`loan`)
@@ -38,11 +51,7 @@ export const getLoanById = async (loanId: string) => {
     return data
 }
 
-export const getLink = async () => {
-    const { data } = await axios.get(`account/checking_account/link`);
-    return data.data
-}
-
+// ====================  PAYMENTS
 export const createPaymentIntent = async (amount: number, payitoffLoanId: string) => {
     const { data } = await axios.post('payment/intent', { amount, payitoffLoanId })
     return data.payment
@@ -53,6 +62,22 @@ export const makePayment = async (paymentId: string) => {
     return data.payment
 }
 
+export const getPayments = async () => {
+    const { data } = await axios.get('payment')
+    return data.payments
+}
+
+export const getPaymentInfo = async (paymentId: string) => {
+    const { data } = await axios.get(`payment/${paymentId}`)
+    return data.payment
+}
+
+export const cancelPayment = async (paymentId: string) => {
+    const { data } = await axios.delete(`payment/${paymentId}`)
+    return data.payment
+}
+
+// ====================  ACCOUNTS
 export const getAccounts = async () => {
     const { data } = await axios.get('account/checking_account')
     return data.accounts
@@ -74,16 +99,6 @@ export const createAccount = async (publicToken: string) => {
 export const deleteAccount = async (accountId: string) => {
     const { data } = await axios.delete(`account/${accountId}`)
     return data
-}
-
-export const getPaymentInfo = async (paymentId: string) => {
-    const { data } = await axios.get(`payment/${paymentId}`)
-    return data.payment
-}
-
-export const getUserInfo = async () => {
-    const { data } = await axios.get('user')
-    return data.user
 }
 
 export const setPrefferedAccount = async (accountId: string) => {

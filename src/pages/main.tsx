@@ -15,6 +15,7 @@ const MainPage = () => {
             <h1>Choose your action</h1>
 
             <div style={{ display: 'flex', flexDirection: 'column', maxWidth: 300 }}>
+                <Button theme="fill" onClick={() => onChooseActionClick('/payments')}>List of User`s payments</Button>
                 <Button theme="fill" onClick={() => onChooseActionClick('/accounts')}>List of User`s accounts</Button>
                 <Button theme="fill" onClick={() => onChooseActionClick('/loans')}>Choose loan</Button>
             </div>

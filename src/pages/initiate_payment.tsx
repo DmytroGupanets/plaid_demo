@@ -37,11 +37,11 @@ export default function Home() {
 
     const payment = await createPaymentIntent(amountInCents, loanId)
     localStorage.setItem('paymentId', payment._id)
-    if (payment.status === 'requires_confirmation') router.push('/confirm_payment')
-    else if (payment.status === 'requires_payment_method') router.push('/connect_checking')
+    router.push('/confirm_payment')
+
   }
 
-  console.log('loan :>> ', loan);
+
   return (
     <div className={'container'}>
       <h1>Initiate payment</h1>
