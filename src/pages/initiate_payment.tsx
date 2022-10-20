@@ -36,7 +36,7 @@ export default function Home() {
     const amountInCents = Number(amount) * 100
 
     const payment = await createPaymentIntent(amountInCents, loanId)
-    localStorage.setItem('paymentId', payment._id)
+    localStorage.setItem('paymentId', payment.id)
     router.push('/confirm_payment')
 
   }

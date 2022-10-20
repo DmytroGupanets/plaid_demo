@@ -23,7 +23,6 @@ const ConfirmPaymentPage = () => {
 		if (!paymentId) router.push('initiate_payment')
 		const payment = await getPaymentInfo(paymentId)
 		setPayment(payment)
-
 		let account
 		if (payment.account) {
 			account = await getAccountById(payment.account)
@@ -42,8 +41,7 @@ const ConfirmPaymentPage = () => {
 	const onHandlePaymentClick = async () => {
 		setLoading(true)
 		const paymentId = localStorage.getItem('paymentId')
-		const confirmedPayment = await makePayment(paymentId)
-		console.log('payment :>> ', confirmedPayment);
+		const confirmedPayment = await makePayment(paymentId, account.id)
 		setLoading(false)
 	}
 

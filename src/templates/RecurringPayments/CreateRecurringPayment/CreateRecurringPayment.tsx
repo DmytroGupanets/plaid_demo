@@ -1,40 +1,55 @@
 import React, { useState } from 'react'
+import { createRecurringPayment } from '../../../api/api'
 import { CreateRecurringPaymentStyled } from './CreateRecurringPaymentStyled'
 
+import { useRouter } from 'next/router'
+import NavBar from '../../../components/NavBar/NavBar'
 
 const CreateRecurringPaymentTemplate = () => {
-    const [isShowTimeInput, setIsShowTimeInput] = useState(false)
     const [isShowCalendar, setIsShowCalendar] = useState(false)
     const [isShowWeekSelector, setIsShowWeekSelector] = useState(false)
 
+    const router = useRouter()
 
     const onPeriodSelect = (e) => {
         if (e.target.value === 'DAILY') {
             setIsShowWeekSelector(false)
             setIsShowCalendar(false)
-            setIsShowTimeInput(true)
-        } else if (e.target.value === 'WEEKLY' || e.target.value === 'FORTNIGHTLY') {
-            setIsShowTimeInput(false)
+        } else if (e.target.value === 'WEEKLY') {
             setIsShowCalendar(false)
             setIsShowWeekSelector(true)
         } else if (e.target.value === 'MONTHLY') {
-            setIsShowTimeInput(false)
             setIsShowWeekSelector(false)
             setIsShowCalendar(true)
         }
     }
 
-    const onHandleSubmit = (e) => {
+    const onHandleSubmit = async (e) => {
 
-        e.preventDefault();
-        const formData = new FormData(e.target);
-        const formProps = Object.fromEntries(formData);
-        console.log('formProps :>> ', formProps);
+        e.preventDefault()
+        const formData = new FormData(e.target)
+        const formProps = Object.fromEntries(formData)
+        const data = {
+            accountId: formProps.account_id,
+            amount: formProps.amount,
+            payitoffLoanId: formProps.loan_id,
+            frequency: {
+                paymentsPeriod: formProps.period,
+                dayOfTheWeek: formProps.weekday,
+                date: formProps.date
+            }
+        }
 
+        const newRecurringPayment = await createRecurringPayment(data)
 
+        if (newRecurringPayment) {
+            router.push('/recurring_payments')
+        }
     }
 
     return <CreateRecurringPaymentStyled>
+
+        <NavBar />
 
         <h1>Create recurring payments</h1>
 
@@ -49,28 +64,17 @@ const CreateRecurringPaymentTemplate = () => {
                 <input className='form_input' type="text" name="loan_id" id="loan_id" />
             </label>
 
-            <label className='form_label' htmlFor="amount_id">
+            <label className='form_label' htmlFor="amount">
                 Amount
-                <input className='form_input' type="number" name="amount_id" id="amount_id" />
+                <input className='form_input' type="number" name="amount" id="amount" />
             </label>
 
             <span className='form_label'>Select period for payments</span>
             <select className='form_select' id="ddlViewBy" name='period' onChange={onPeriodSelect}>
                 <option className='form_option' value="DAILY">Daily</option>
                 <option className='form_option' value="WEEKLY">Weekly</option>
-                <option className='form_option' value="FORTNIGHTLY">Fortnightly</option>
                 <option className='form_option' value="MONTHLY">Monthly</option>
             </select>
-
-            {isShowTimeInput &&
-                <div className='form_time'>
-                    <span className='form_label'>HH : MM</span>
-                    <div>
-                        <input className='form_hours' name='hours' id='hours' type='number' min='0' max='23' placeholder='12' />
-                        <input className='form_minutes' name='minutes' id='minutes' type='number' min='0' max='59' placeholder='00' />
-                    </div>
-                </div>
-            }
 
             {isShowCalendar &&
                 <div className='form_time'>

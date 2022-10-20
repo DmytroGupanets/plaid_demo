@@ -1,9 +1,23 @@
+@import url('https://fonts.googleapis.com/css2?family=Mingzat&family=Nunito:wght@400;500;600;700&display=swap');
+
 html,
 body {
   padding: 0;
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
     Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+}
+
+body {
+  position: relative;
+  height: 100vh;
+  width: 100vw;
+  background: linear-gradient(
+    90deg,
+    rgba(181, 181, 181, 1) 0%,
+    rgba(235, 235, 235, 0.4419889502762431) 50%,
+    rgba(181, 181, 181, 1) 100%
+  );
 }
 
 * {

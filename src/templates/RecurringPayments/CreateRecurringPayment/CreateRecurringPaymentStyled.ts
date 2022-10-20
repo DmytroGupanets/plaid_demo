@@ -58,6 +58,16 @@ export const CreateRecurringPaymentStyled = styled.div`
     border-radius: 5px;
   }
 
+  .form_offset {
+    padding: 5px;
+    border: 1px solid #04429ed8;
+    border-radius: 5px;
+  }
+
+  .form_inputsWrapper {
+    margin-bottom: 15px;
+  }
+
   .form_createBtn {
     margin-top: 50px;
     min-height: 45px;

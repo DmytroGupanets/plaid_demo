@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react'
 import { deleteAccount, getAccounts, setPrefferedAccount } from '../api/api'
 import AccountCard from '../components/AccountCard/AccountCard'
 import Button from '../components/Button/Button'
+import NavBar from '../components/NavBar/NavBar'
 
 
 const AccountsPage = () => {
@@ -11,8 +12,6 @@ const AccountsPage = () => {
     const [preffered, setPreffered] = useState(null)
 
     const router = useRouter()
-
-
 
     const getUserAccounts = async () => {
         setLoading(true)
@@ -50,6 +49,7 @@ const AccountsPage = () => {
 
 
     return <div className="container">
+        <NavBar />
         <h1>Accounts</h1>
         <p>You can choose your preffered account for payments</p>
         {loading && <p>Loading User`s accounts...</p>}

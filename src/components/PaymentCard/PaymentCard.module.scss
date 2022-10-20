@@ -13,6 +13,19 @@
         justify-content: space-between;
     }
 
+    &__typeWrapper {
+        height: fit-content;
+        padding: 2px;
+        border-radius: 12px;
+        background-color: rgb(255, 230, 0);
+    }
+
+    &__type {
+        font-size: 16px;
+        font-weight: 500;
+        margin: 0;
+    }
+
     &__amount {
         font-size: large;
         font-weight: 700;

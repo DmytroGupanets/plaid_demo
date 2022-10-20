@@ -5,6 +5,7 @@ import { useForm } from "react-hook-form";
 import { getAllLoans } from "../api/api";
 import Button from '../components/Button/Button';
 import LoanCard from "../components/LoanCard/LoanCard";
+import NavBar from "../components/NavBar/NavBar";
 
 
 export default function Home() {
@@ -30,6 +31,7 @@ export default function Home() {
 
     return (
         <div className={'container'}>
+            <NavBar />
             <h1>User`s loans</h1>
             <p>Choose loan you wish to initiate payment</p>
             {isLoading ?

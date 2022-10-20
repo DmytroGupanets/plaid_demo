@@ -1,0 +1,43 @@
+.card {
+  width: 400px;
+  padding: 10px;
+  background-color: rgb(184, 220, 250);
+  border-radius: 12px;
+  margin-bottom: 15px;
+  box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.05);
+  cursor: pointer;
+  transform: scaleX(1);
+  display: flex;
+}
+.card:hover,
+.card :focus {
+  transform: scale(1.1);
+}
+.card__info {
+  margin-left: 15px;
+}
+.card__logoWrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.card__logo {
+  align-self: center;
+  width: 70px;
+  height: 70px;
+}
+.card__servicer {
+  font-size: large;
+  font-weight: 700;
+  margin: 0;
+}
+.card__description {
+  margin: 0;
+  margin-bottom: 10px;
+}
+.card__interest {
+  margin: 0;
+}
+.card__principal {
+  margin: 0;
+}/*# sourceMappingURL=LoanCard.module.css.map */

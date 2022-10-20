@@ -16,4 +16,9 @@ export const RecuringPaymentsStyled = styled.div`
     font-size: 12px;
     opacity: 0.7;
   }
+
+  .buttonWrapper{
+    display: flex;
+    justify-content: space-between;
+  }
 `

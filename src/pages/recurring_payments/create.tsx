@@ -4,11 +4,6 @@ import CreateRecurringPaymentTemplate from '../../templates/RecurringPayments/Cr
 
 export const CreateRecurringPayment = () => {
 
-
-
-
-
-
     return <CreateRecurringPaymentTemplate />
 }
 

@@ -16,6 +16,10 @@ const SECONDS_PER_DAY = 86400
 
 module.exports = {
   ...withImages(),
+  experimental: { images: { layoutRaw: true } },
+  images: {
+    domains: ['static.methodfi.com'],
+  },
   reactStrictMode: true,
   onDemandEntries: {
     // period (in ms) where the server will keep pages in the buffer
