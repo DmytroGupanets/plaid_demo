@@ -2,8 +2,8 @@ import { userInfo } from 'os';
 import axios from "axios";
 
 // axios.defaults.baseURL = '/api/'
-axios.defaults.baseURL = 'http://localhost:5502/v1.2'
-// axios.defaults.baseURL = 'https://api.dev.levermydebt.com/'
+// axios.defaults.baseURL = 'http://localhost:5502/v1.3'
+axios.defaults.baseURL = 'https://api.dev.levermydebt.com/v1.3'
 
 
 interface ILoginConfirm {

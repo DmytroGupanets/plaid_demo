@@ -47,7 +47,7 @@ const AccountsPage = () => {
     }
 
 
-
+    console.log('accounts :>> ', accounts);
     return <div className="container">
         <NavBar />
         <h1>Accounts</h1>
